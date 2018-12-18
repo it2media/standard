@@ -1,0 +1,42 @@
+image: 192.168.59.159/dotnet:latest
+
+stages:
+  - build
+  - test
+
+variables:
+  abstractions: src/IT2media.Standard.Abstractions
+  standard: src/IT2media.Standard
+  test: test/IT2media.Standard.xUnitTests
+
+before_script:
+  - "cd $abstractions"
+  - "dotnet restore"
+  - "cd .."
+  - "cd .."
+  - "cd $standard"
+  - "dotnet restore"
+  - "cd .."
+  - "cd .."
+  - "cd $test"
+  - "dotnet restore"
+  - "cd .."
+  - "cd .."
+
+build:
+  stage: build
+  script:
+    - "cd $abstractions"
+    - "dotnet build"
+    - "cd .."
+    - "cd .."
+    - "cd $standard"
+    - "dotnet build"
+    - "cd .."
+    - "cd .."
+
+test:
+  stage: test
+  script:
+    - "cd $test"
+    - "dotnet test"
