@@ -8,4 +8,12 @@
     <ProjectReference Include="..\IT2media.Standard.Abstractions\IT2media.Standard.Abstractions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Logging\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="NLog" Version="4.5.11" />
+  </ItemGroup>
+
 </Project>
