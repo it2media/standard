@@ -14,18 +14,25 @@ namespace IT2media.Standard.Logging
     public static class LogFactoryExtensions
     {
         #region observableLogger
-        private static ObservableLoggerProvider _observableLoggerProvider;
+        private static Dictionary<int, ObservableLoggerProvider> _observableLoggerProvider = new Dictionary<int, ObservableLoggerProvider>();
         /// <summary>
         /// adds a observable logger, don't use this in production by default
         /// </summary>
         public static void AddObservableLogger(this LoggerFactory loggerFactory)
         {
-            if (_observableLoggerProvider == null) // dont add it twice
+            var obsL = loggerFactory.GetAndAttachObservableLoggerProvider();
+            obsL.Enable();
+        }
+
+        private static ObservableLoggerProvider GetAndAttachObservableLoggerProvider(this LoggerFactory loggerFactory)
+        {
+            int hashCode = loggerFactory.GetHashCode();
+            if (!_observableLoggerProvider.ContainsKey(hashCode))
             {
-                _observableLoggerProvider = new ObservableLoggerProvider();
-                loggerFactory.AddProvider(_observableLoggerProvider);
+                _observableLoggerProvider[hashCode] = new ObservableLoggerProvider();
+                loggerFactory.AddProvider(_observableLoggerProvider[hashCode]);
             }
-            _observableLoggerProvider.Enable();
+            return _observableLoggerProvider[hashCode];
         }
 
         /// <summary>
@@ -33,19 +40,19 @@ namespace IT2media.Standard.Logging
         /// </summary>
         public static void DisableObservableLogger(this LoggerFactory loggerFactory)
         {
-            if (_observableLoggerProvider != null) // dont add it twice
-            {
-                _observableLoggerProvider.Disable();
-            }
+            var obsL = loggerFactory.GetAndAttachObservableLoggerProvider();
+            obsL.Disable();
         }
 
-        public static ObservableCollection<string> GetObservableLoggerKeys()
+        public static ObservableCollection<string> GetObservableLoggerKeys(this LoggerFactory loggerFactory)
         {
-            return _observableLoggerProvider.CategoryNames;
+            var obsL = loggerFactory.GetAndAttachObservableLoggerProvider();
+            return obsL.CategoryNames;
         }
-        public static ObservableCollection<string> GetObservableLogHistory(string categoryName)
+        public static ObservableCollection<string> GetObservableLogHistory(this LoggerFactory loggerFactory, string categoryName)
         {
-            return _observableLoggerProvider.GetLogHistory(categoryName);
+            var obsL = loggerFactory.GetAndAttachObservableLoggerProvider();
+            return obsL.GetLogHistory(categoryName);
         }
 
         #endregion

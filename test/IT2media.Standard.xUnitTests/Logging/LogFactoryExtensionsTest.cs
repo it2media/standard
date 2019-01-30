@@ -31,7 +31,7 @@ namespace IT2media.Standard.xUnitTests.Logging
         {
             _loggerFactory.AddObservableLogger();
             var logger = _loggerFactory.CreateLogger("xUnitTest");
-            var logCol = LogFactoryExtensions.GetObservableLogHistory("xUnitTest");
+            var logCol = _loggerFactory.GetObservableLogHistory("xUnitTest");
             var initialCount = logCol.Count;
             logger.LogDebug("Test");
             logCol.Count.Should().Be(initialCount + 1);
@@ -41,7 +41,7 @@ namespace IT2media.Standard.xUnitTests.Logging
         {
             _loggerFactory.AddObservableLogger();
             var logger = _loggerFactory.CreateLogger("xUnitTest");
-            var logCol = LogFactoryExtensions.GetObservableLogHistory("xUnitTest");
+            var logCol = _loggerFactory.GetObservableLogHistory("xUnitTest");
             var initialCount = logCol.Count;
             _loggerFactory.DisableObservableLogger();
             logger.LogDebug("test");
@@ -55,7 +55,7 @@ namespace IT2media.Standard.xUnitTests.Logging
             var logger = _loggerFactory.CreateLogger("xUnitTest");
             var logger2 = _loggerFactory.CreateLogger("xUnitTest2");
             var logger3 = _loggerFactory.CreateLogger("xUnitTest3");
-            var keys = LogFactoryExtensions.GetObservableLoggerKeys();
+            var keys = _loggerFactory.GetObservableLoggerKeys();
             keys.Should().HaveCount(3);
             keys.Should().Contain("xUnitTest");
             keys.Should().Contain("xUnitTest2");
@@ -68,7 +68,7 @@ namespace IT2media.Standard.xUnitTests.Logging
             _loggerFactory.AddObservableLogger();
             var logger = _loggerFactory.CreateLogger("xUnitTest");
             logger.LogDebug("This is a test");
-            LogFactoryExtensions.GetObservableLogHistory("xUnitTest");
+            _loggerFactory.GetObservableLogHistory("xUnitTest");
         }
 
         [Fact]

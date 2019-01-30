@@ -65,8 +65,7 @@ namespace IT2media.Standard.Logging
 
         public void Dispose()
         {
-            _loggerDict.Clear();
-            _loggerDict = null; 
+
         }
 
         // the implementation of the logger is not public, its not necessary
