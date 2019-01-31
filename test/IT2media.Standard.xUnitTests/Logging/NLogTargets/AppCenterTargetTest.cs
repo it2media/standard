@@ -29,7 +29,15 @@ namespace IT2media.Standard.xUnitTests.Logging.NLogTargets
         {
             _loggerFactory.AddNLog("NLogAppCenter.config");
             var logger = _loggerFactory.CreateLogger("xUnitTest");
-            logger.LogError("This is a test",new Exception("this is a test exception"));
+            try
+            {
+                throw new Exception("this is a test with an exception");
+            }
+            catch (Exception e)
+            {
+                logger.LogError(e, "This is a test");
+            }
+            
         }
 
     }
