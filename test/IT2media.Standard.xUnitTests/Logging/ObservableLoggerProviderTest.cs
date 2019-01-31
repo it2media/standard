@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using IT2media.Standard.Logging;
+﻿using IT2media.Standard.Logging;
 using Microsoft.Extensions.Logging;
 using Xunit;
 
