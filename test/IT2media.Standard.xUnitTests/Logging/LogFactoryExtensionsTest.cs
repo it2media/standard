@@ -92,7 +92,7 @@ namespace IT2media.Standard.xUnitTests.Logging
             {
                 File.Delete("test2.log");
             }
-            _loggerFactory.AddNLog();
+            _loggerFactory.AddNLog("NLog.config");
             var logger = _loggerFactory.CreateLogger("xUnitTest");
             using (var stream = File.OpenRead("NLog2.config"))
             {
