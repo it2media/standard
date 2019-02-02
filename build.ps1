@@ -90,6 +90,9 @@ function GetProxyEnabledWebClient
     return $wc
 }
 
+$juntionTarget = Get-Item . | Select-Object -ExpandProperty Target
+if ($variablename) { Set-Location $juntionTarget }
+
 Write-Host "Preparing to run build script..."
 
 if(!$PSScriptRoot){
