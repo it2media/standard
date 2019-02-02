@@ -15,7 +15,7 @@ namespace IT2media.Standard.xUnitTests.Logging.NLogTargets
         public void InitializeWithConfig()
         {
             _loggerFactory.AddNLog("NLogAppCenter.config");
-            var logger = _loggerFactory.CreateLogger("xUnitTest");
+            var unused = _loggerFactory.CreateLogger("xUnitTest");
         }
         [Fact]
         public void TestDebugLog()
@@ -37,8 +37,6 @@ namespace IT2media.Standard.xUnitTests.Logging.NLogTargets
             {
                 logger.LogError(e, "This is a test");
             }
-            
         }
-
     }
 }

@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Microsoft.Extensions.Logging;
 
 namespace IT2media.Standard.Logging
@@ -10,6 +8,7 @@ namespace IT2media.Standard.Logging
     internal class ObservableLoggerProvider :ILoggerProvider
     {
         private ConcurrentDictionary<string, ObservableLogger> _loggerDict = new ConcurrentDictionary<string, ObservableLogger>();
+        // ReSharper disable once RedundantDefaultMemberInitializer
         private bool _isEnabled = false;
         public ObservableCollection<string> CategoryNames { get; } = new ObservableCollection<string>();
 
@@ -59,8 +58,9 @@ namespace IT2media.Standard.Logging
         private void SetEnabledToLogger()
         {
             foreach (var logger in _loggerDict)
+            {
                 logger.Value.Enabled = _isEnabled;
-
+            }
         }
 
         public void Dispose()
@@ -77,7 +77,10 @@ namespace IT2media.Standard.Logging
             public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
             {
                 if (!IsEnabled(logLevel))
+                {
                     return;
+                }
+
                 if (formatter != null)
                 {
                     LogHistory.Add(formatter(state, exception));

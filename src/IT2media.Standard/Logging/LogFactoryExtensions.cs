@@ -4,10 +4,8 @@ using System.Collections.ObjectModel;
 using System.Xml;
 using IT2media.Standard.Logging.NLogTargets;
 using NLog;
-using NLog.Common;
 using NLog.Config;
 using NLog.Extensions.Logging;
-using NLog.LayoutRenderers;
 
 namespace IT2media.Standard.Logging
 {
@@ -99,7 +97,5 @@ namespace IT2media.Standard.Logging
 
 
         #endregion
-
-       
     }
 }

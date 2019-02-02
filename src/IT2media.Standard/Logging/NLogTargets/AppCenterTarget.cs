@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Diagnostics;
-using System.Text;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
 using NLog;
 using NLog.Config;
 using NLog.Targets;
-using LogLevel = Microsoft.AppCenter.LogLevel;
 
 namespace IT2media.Standard.Logging.NLogTargets
 {
@@ -16,11 +13,6 @@ namespace IT2media.Standard.Logging.NLogTargets
 
     public sealed class AppCenterTarget : TargetWithLayout
     {
-        public AppCenterTarget()
-        {
-            
-        }
-
         [RequiredParameter]
         public string AppSecret { get; set; }
 
@@ -37,8 +29,7 @@ namespace IT2media.Standard.Logging.NLogTargets
                 Debug.WriteLine("[AppCenterTarget] AppCenter started");
             }
 
-            var lo = this.Layout.ToString();
-            string logMessage = this.Layout.Render(logEvent);
+            var logMessage = Layout.Render(logEvent);
             Dictionary<string, string> props = new Dictionary<string, string>
             {
                 {"LogLevel", logEvent.Level.ToString()},
@@ -54,7 +45,5 @@ namespace IT2media.Standard.Logging.NLogTargets
                 Analytics.TrackEvent(logEvent.LoggerName, props);
             }
         }
-
-
     }
 }
