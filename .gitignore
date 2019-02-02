@@ -267,3 +267,4 @@ __pycache__/
 /src/IT2media.IdentityServer/identityserver4_log.txt
 /desktop.ini
 /src/IT2media.SalesDataCore/.vscode
+/tools
