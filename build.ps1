@@ -91,7 +91,12 @@ function GetProxyEnabledWebClient
 }
 
 $juntionTarget = Get-Item . | Select-Object -ExpandProperty Target
-if ($variablename) { Set-Location $juntionTarget }
+if ($juntionTarget) 
+{
+	Write-Host "Dropping to junction target: "
+	Write-Host "$juntionTarget"
+	Set-Location $juntionTarget 
+}
 
 Write-Host "Preparing to run build script..."
 
