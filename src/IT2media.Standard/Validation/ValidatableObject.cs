@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Linq;
 using System.Runtime.CompilerServices;
 
 namespace IT2media.Standard.Validation
@@ -42,8 +41,23 @@ namespace IT2media.Standard.Validation
             }
         }
 
-        public string Messages =>
-            string.Join(Environment.NewLine, Validations.Select(v => v.Message));
+        public string Messages
+        {
+            get
+            {
+                string messages = string.Empty;
+
+                foreach (IValidationRule<TType> validationRule in Validations)
+                {
+                    if (!validationRule.Validate(_value))
+                    {
+                        messages += string.Join(Environment.NewLine, validationRule.Message);
+                    }
+                }
+
+                return messages;
+            }
+        }
 
         public void Validate()
         {

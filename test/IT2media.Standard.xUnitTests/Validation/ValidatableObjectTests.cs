@@ -20,9 +20,8 @@ namespace IT2media.Standard.xUnitTests.Validation
             string message = "The error message of the rule";
             IValidationRule<string> mockValidationRule = A.Fake<IValidationRule<string>>();
             A.CallTo(() => mockValidationRule.Message).Returns(message);
-            A.CallTo(() => mockValidationRule.Validate(A<string>._)).Returns(true);
+            A.CallTo(() => mockValidationRule.Validate(A<string>._)).Returns(false);
             ValidatableObject<string> stringObject = new ValidatableObject<string>(mockValidationRule);
-
             stringObject.Messages.Should().Contain(message);
         }
 
@@ -33,12 +32,31 @@ namespace IT2media.Standard.xUnitTests.Validation
             string messageLength = "The length message of the rule";
             IValidationRule<string> mockMailRule = A.Fake<IValidationRule<string>>();
             A.CallTo(() => mockMailRule.Message).Returns(messageMail);
+            A.CallTo(() => mockMailRule.Validate(A<string>._)).Returns(false);
             IValidationRule<string> mockLengthRule = A.Fake<IValidationRule<string>>();
             A.CallTo(() => mockLengthRule.Message).Returns(messageLength);
+            A.CallTo(() => mockLengthRule.Validate(A<string>._)).Returns(false);
             ValidatableObject<string> stringObject = new ValidatableObject<string>(mockMailRule, mockLengthRule);
 
             stringObject.Messages.Should().Contain(messageMail);
             stringObject.Messages.Should().Contain(messageLength);
+        }
+
+        [Fact]
+        public void One_ErrorMessages_should_be_equal_to_given_messages()
+        {
+            string messageMail = "The mail message of the rule";
+            string messageLength = "The length message of the rule";
+            IValidationRule<string> mockMailRule = A.Fake<IValidationRule<string>>();
+            A.CallTo(() => mockMailRule.Message).Returns(messageMail);
+            A.CallTo(() => mockMailRule.Validate(A<string>._)).Returns(false);
+            IValidationRule<string> mockLengthRule = A.Fake<IValidationRule<string>>();
+            A.CallTo(() => mockLengthRule.Message).Returns(messageLength);
+            A.CallTo(() => mockLengthRule.Validate(A<string>._)).Returns(true);
+            ValidatableObject<string> stringObject = new ValidatableObject<string>(mockMailRule, mockLengthRule);
+
+            stringObject.Messages.Should().Contain(messageMail);
+            stringObject.Messages.Should().NotContain(messageLength);
         }
 
         [Fact]
