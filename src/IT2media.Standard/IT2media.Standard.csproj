@@ -2,10 +2,47 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
+    <Authors>IT2media GmbH &amp; Co. KG</Authors>
+    <PackageIconUrl>https://raw.githubusercontent.com/it2media/Home/master/Logo_IT2media_2015_64x64.png</PackageIconUrl>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/it2media/Standard/master/LICENSE</PackageLicenseUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Owners>IT2media GmbH &amp; Co. KG</Owners>
+    <PackageProjectUrl>https://github.com/it2media/Standard</PackageProjectUrl>
+    <Summary>Open source library published by IT2media</Summary>
+    <Title>IT2media.Standard</Title>
+    <Version>1.0.4</Version>
+    <AssemblyVersion>1.0.0.0</AssemblyVersion>
+    <FileVersion>1.0.0.0</FileVersion>
+    <RepositoryUrl>https://github.com/it2media/standard.git</RepositoryUrl>
+    <RepositoryType>Git</RepositoryType>
+    <PackageTags>it2media dotnet standard</PackageTags>
+    <Copyright>IT2media GmbH &amp; Co. KG</Copyright>
+	
+    <Description>Open source library published by IT2media.
+
+https://raw.githubusercontent.com/it2media/Standard/master/CHANGELOG.md</Description>
+    <PackageReleaseNotes>https://raw.githubusercontent.com/it2media/Standard/master/CHANGELOG.md</PackageReleaseNotes>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>..\..\bin\IT2media.Standard\Debug</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>..\..\bin\IT2media.Standard\Release</OutputPath>
   </PropertyGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\IT2media.Standard.Abstractions\IT2media.Standard.Abstractions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AppCenter.Analytics" Version="1.13.0" />
+    <PackageReference Include="Microsoft.AppCenter.Crashes" Version="1.13.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging" Version="2.2.0" />
+    <PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="2.2.0" />
+    <PackageReference Include="NLog" Version="4.5.11" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="1.4.0" />
   </ItemGroup>
 
 </Project>
